@@ -12,6 +12,7 @@
 
 3. Wireframes 
  * https://wireframe.cc/LgVViA
+   ![wireframe](/home/edwardg/Pictures/wireframe.png)
  
 4. Architecture and Technology 
  * I will using JS and D3 to create the graphical transitions, and html and scss to style and structure the DOM. Webpack will be used as the bundler and babel as the transpiler.
