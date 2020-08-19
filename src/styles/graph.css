@@ -1,0 +1,5 @@
+#graph-bckgrnd {
+    background: linear-gradient(to right, rgb(0, 0, 0) 0%, rgb(49, 49, 49) 33%, rgb(78, 78, 78) 75%);
+    height:900px;
+    width:100%;
+}

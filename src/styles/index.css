@@ -1,0 +1,111 @@
+body {
+    margin: 0;
+    height: 100%;
+    width: 100%
+}
+
+figure {
+    position: absolute;
+    margin: 0;
+}
+
+#COVID {
+    height: 100%;
+    width: 100%;
+    background: linear-gradient(to right, rgb(0, 0, 0) 0%, rgb(49, 49, 49) 33%, rgb(78, 78, 78) 75%);
+}
+
+circle {
+    fill: rgb(219, 99, 0);
+}
+
+.frame svg {
+    position: absolute;
+}
+
+.frame svg:nth-child(1) {
+    top: 5%;
+    left: 7%;
+    animation: animate 9s linear infinite;
+}
+.frame svg:nth-child(2) {
+    top: 3%;
+    left: 24%;
+    animation: animate 8.4s linear infinite;
+}
+.frame svg:nth-child(3) {
+    top: 30%;
+    left: 2%;
+    animation: animate 3.8s linear infinite;
+}
+.frame svg:nth-child(4) {
+    top: 17%;
+    left: 15%;
+    animation: animate 5.5s linear infinite;
+}
+.frame svg:nth-child(5) {
+    top: 45%;
+    left: 12%;
+    animation: animate 5s linear infinite;
+}
+.frame svg:nth-child(6) {
+    top: 85%;
+    left: 9%;
+    animation: animate 11s linear infinite;
+}
+.frame svg:nth-child(7) {
+    top: 22%;
+    left: 22%;
+    animation: animate 9s linear infinite;
+}
+.frame svg:nth-child(8) {
+    top: 71%;
+    left: 6%;
+    animation: animate 4.5s linear infinite;
+}
+.frame svg:nth-child(9) {
+    top: 73%;
+    left: 22%;
+    animation: animate 6s linear infinite;
+}
+.frame svg:nth-child(10) {
+    top: 92%;
+    left: 34%;
+    animation: animate 8s linear infinite;
+}
+
+@keyframes animate {
+    0%{
+        transform: scale(0);
+        opacity: 1;
+    }
+    100%{
+        transform: scale(1.5);
+        opacity: 0;
+    }
+}
+
+#home-page-header {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    position: absolute;
+    z-index: 1;
+    top: 1%;
+    right: 4%;
+}
+
+#stats-header{
+    text-decoration:underline;
+}
+
+.country {
+    display: block;
+    text-decoration: none;
+    font-weight: bolder;
+    background: -webkit-linear-gradient(270deg,rgb(245, 0, 0),rgb(255, 255, 255),rgb(2, 6, 241));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: xxx-large;
+    margin-right: 5px;
+}
