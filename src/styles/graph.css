@@ -3,3 +3,7 @@
     height:900px;
     width:100%;
 }
+
+svg {
+    display: inline-block;
+}
