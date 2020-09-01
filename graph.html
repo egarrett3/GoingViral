@@ -123,6 +123,10 @@
         let width = 1450;
         let margin = 200;
         
+        function commasForNums(x) {
+            return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        }
+
         function clenseDups(data) {
             const distinctVals = [];
             
@@ -180,7 +184,6 @@
             .attr('dy','.35em')
             .attr('transform','rotate(-70)')
 
-            
         g.append("g")
             .call(d3.axisLeft(yScale))
             .append("text")
@@ -191,24 +194,44 @@
             .attr("stroke", "black")
             .text("Tests");
 
+        let div = d3.select('body').append('div')
+            .style('opacity','0')
+            .attr('class','tooltip')
+            .style("padding", "5px")
+            .style("background-color", "white")
+            .style("border", "solid")
+            .style("border-width", "2px")
+            .style("border-radius", "0px")
+
         g.selectAll(".rect")
             .data(distinctValues)
             .enter().append("rect")
             .attr("class", "bar")
-            // .on("mouseover", onMouseOver) //Add listener for the mouseover event
-            // .on("mouseout", onMouseOut)   //Add listener for the mouseout event
-            .on('mouseover', function (d, i) {
-                d3.select(this).transition()
-                    .duration('50')
-                    .attr('opacity', '.85')})
-            .on('mouseout', function (d, i) {
-                d3.select(this).transition()
-                    .duration('50')
-                    .attr('opacity', '1')})
             .attr("x", function (distinctValues) { return xScale(secondsEpochToDate(distinctValues.seconds_since_Epoch)) })
             // .attr("x", function (data,i) { return xScale(i) })
             .attr("y", function (distinctValues) { return yScale(distinctValues.tested)})
             .attr("width", xScale.bandwidth())
-            .attr("height", function (distinctValues) { return ((height-margin) - yScale(distinctValues.tested)) });
+            .attr("height", function (distinctValues) { return ((height-margin) - yScale(distinctValues.tested)) })
+            .on('mouseover', function (d, i) {
+                d3.select(this).transition()
+                    .duration('50')
+                    .attr('opacity', '.85')
+                div.transition()
+                   .duration('50')
+                   .style('opacity', '1')
+                div.html('tested cases: ' + commasForNums(distinctValues[i].tested) + '<br>positive cases: ' + 
+                         commasForNums(distinctValues[i].positive) + '<br>resulting deaths: ' + 
+                         commasForNums(distinctValues[i].deaths))
+                   .style('left', (d3.event.clientX - 13) + 'px')
+                   .style('top', (d3.event.clientY - 20) + 'px')
+                })
+            .on('mouseout', function (d, i) {
+                d3.select(this).transition()
+                    .duration('50')
+                    .attr('opacity', '1')
+                div.transition()
+                    .duration('50')
+                    .style('opacity', '0')
+                });
 </script>
 </html>
