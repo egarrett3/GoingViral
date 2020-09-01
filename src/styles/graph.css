@@ -10,13 +10,14 @@ svg {
 
 div.tooltip {
     position: absolute;
-    text-align: center;
+    text-align: left;
     background: #FFFFFF;
     color: #080808;
     border: 1px solid #000000;
     border-radius: 0px;
     pointer-events: none;
     font-size: 1.3rem;
+    padding: 5px;
 }
 
 rect.bar {
