@@ -8,21 +8,23 @@ let d3 = require("d3");
 
 app.use(express.static("dist"));
 
-
 app.get("/", (request, res) => {
   res.sendFile(path.join(__dirname, "./dist/index.html"));
 });
 
-app.get("graph/:state", (request, response) => {
-  debugger
+
+app.get("/dat/:state", (request, response) => {
   // make api call using fetch
-  fetch (
-    `http://coronavirusapi.com/getTimeSeries/${state}`
-  )
+  // console.log(request.params.state);
+  const state = request.params.state;
+  const api_url = `http://coronavirusapi.com/getTimeSeries/${state}`;
+  fetch(api_url)
     .then((response) => {
+      // console.log(response);
       return response.text();
     })
     .then((text) => {
+      // console.log(text);
       let results = d3.csvParse(text);
       console.log(results); // logs to server
       response.send(results); // sends to frontend

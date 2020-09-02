@@ -1,10 +1,24 @@
 import './styles/index.css';
 import './styles/graph.css';
-import renderData from './getStateData';
 import axios from 'axios';
 import graph from './graph';
+import getData from './dataCall';
 
-window.addEventListener("DOMContentLoaded", () => {
-    graph();
-    // renderData("CA");
-});
+// if (document.querySelector('.state')) {
+//     const st = document.querySelector('.state')
+//     st.addEventListener('click', e => {
+//         e.preventDefault()
+//         getData(e.currentTarget.textContent)
+//     });
+// }
+
+// async function getData(state) {
+//     const api_url = `/graph/${state}`;
+//     const response = await fetch(api_url);
+//     const text = await reponse.text();
+//     graph(text);
+// }
+
+
+
+
