@@ -15,7 +15,60 @@
 <body>
     <div id='graph-bckgrnd'>
         <div id='graph'>
-            <a class='state'>AR</a>
+            
+                <div id='scroll'>
+                    <div class='state'>AL</div>
+                    <div class='state'>AK</div> 
+                    <div class='state'>AZ</div> 
+                    <div class='state'>AR</div>
+                    <div class='state'>CA</div> 
+                    <div class='state'>CO</div> 
+                    <div class='state'>CT</div> 
+                    <div class='state'>DE</div> 
+                    <div class='state'>FL</div> 
+                    <div class='state'>GA</div> 
+                    <div class='state'>HI</div> 
+                    <div class='state'>ID</div> 
+                    <div class='state'>IL</div> 
+                    <div class='state'>IN</div> 
+                    <div class='state'>IA</div> 
+                    <div class='state'>KS</div> 
+                    <div class='state'>KY</div> 
+                    <div class='state'>LA</div> 
+                    <div class='state'>ME</div> 
+                    <div class='state'>MD</div> 
+                    <div class='state'>MA</div> 
+                    <div class='state'>MI</div> 
+                    <div class='state'>MN</div> 
+                    <div class='state'>MS</div> 
+                    <div class='state'>MO</div> 
+                    <div class='state'>MT</div> 
+                    <div class='state'>NE</div> 
+                    <div class='state'>NV</div> 
+                    <div class='state'>NH</div> 
+                    <div class='state'>NJ</div> 
+                    <div class='state'>NM</div> 
+                    <div class='state'>NY</div> 
+                    <div class='state'>NC</div> 
+                    <div class='state'>ND</div> 
+                    <div class='state'>OH</div> 
+                    <div class='state'>OK</div> 
+                    <div class='state'>OR</div> 
+                    <div class='state'>PA</div> 
+                    <div class='state'>RI</div> 
+                    <div class='state'>SC</div> 
+                    <div class='state'>SD</div> 
+                    <div class='state'>TN</div> 
+                    <div class='state'>TX</div> 
+                    <div class='state'>UT</div> 
+                    <div class='state'>VT</div> 
+                    <div class='state'>VA</div> 
+                    <div class='state'>WA</div> 
+                    <div class='state'>WV</div> 
+                    <div class='state'>WI</div> 
+                    <div class='state'>WY</div>
+                </div>
+            
         </div>
     </div>
     <script src="./main.js"></script>
@@ -47,10 +100,12 @@
 
     function removeChildren() {
         let grph = document.querySelector('svg');
+        let tooltip = document.querySelector('.tooltip')
 
         while (grph.firstChild) {
             grph.removeChild(grph.firstChild)
         }
+        tooltip.remove()
     }
     
     function loadUSAData() {
@@ -60,24 +115,29 @@
         setGraphTrue();
     }
 
+   
+    document.getElementById("scroll").addEventListener("scroll", function(){})
+
     if (document.querySelector('.state')) {
-        const st = document.querySelector('.state')
-        st.addEventListener('click', e => {
-            e.preventDefault();
-            removeChildren();
-            getState(e.currentTarget.textContent)
-        });
+        [...document.querySelectorAll('.state')].forEach(function(stadt) {
+            stadt.addEventListener('click', e => {
+                e.preventDefault();
+                removeChildren();
+                getState(e.currentTarget.textContent)
+            });
+
+        })
         setGraphTrue();
     }
 
     if (getGraph()) {
         window.addEventListener('unload', function () {
-            let grph = document.querySelector('svg');
             removeChildren();
         });
         setGraphFalse();
     } else {
         loadUSAData();
+        setGraphTrue();
     }
 
     async function getState(state) {
