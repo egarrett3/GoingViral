@@ -2,7 +2,7 @@
   "name": "goingviral",
   "version": "1.0.0",
   "description": "coronavirus data visualization",
-  "main": "index.js",
+  "main": "app.js",
   "dependencies": {
     "@babel/core": "^7.11.1",
     "@babel/plugin-proposal-optional-chaining": "^7.11.0",
@@ -39,7 +39,7 @@
   ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "webpack-dev-server --config webpack.dev.js",
+    "start": "node app.js",
     "webpack:watch": "webpack --watch --config webpack.dev.js",
     "webpack:build": "webpack --config webpack.prod.js  --optimize-minimize"
   },
