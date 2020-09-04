@@ -15,8 +15,6 @@ class Graph {
 
     formBar(coronaData) {
         const bar = selectAll('g')
-            // .data(coronaData)
-            // .join('g')
                 .attr('fill',(d,i) => this.orangeRange(i))
             .selectAll('bar')
             .data(coronaData)

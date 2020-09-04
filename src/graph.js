@@ -52,13 +52,10 @@ svg.append('text')
 
 let xScale = d3.scaleBand().range([0, width - margin]).padding(0.09)
     .domain(distinctValues.map(time => secondsEpochToDate(time.seconds_since_Epoch)))
-// .domain(d3.range(data.length))
 
-// let xDates = d3.scaleBand().range([0, width - margin]).padding(0.2)
-//     .domain(data.map(time => secondsEpochToDate(time.seconds_since_Epoch)))
 
 let yScale = d3.scaleLinear().range([height - margin, 0])
-    .domain([0, d3.max(distinctValues, function (dt) { return parseInt(dt.tested) })]) // figure out a linear scale for domain height
+    .domain([0, d3.max(distinctValues, function (dt) { return parseInt(dt.tested) })]) 
 
 let g = svg.append("g")
     .attr("transform", "translate(" + 100 + "," + 100 + ")")
@@ -91,7 +88,6 @@ g.selectAll(".rect")
     .enter().append("rect")
     .attr("class", "bar")
     .attr("x", function (distinctValues) { return xScale(secondsEpochToDate(distinctValues.seconds_since_Epoch)) })
-    // .attr("x", function (data,i) { return xScale(i) })
     .attr("y", function (distinctValues) { return yScale(distinctValues.tested) })
     .attr("width", xScale.bandwidth())
     .attr("height", function (distinctValues) { return ((height - margin) - yScale(distinctValues.tested)) })

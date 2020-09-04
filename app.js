@@ -14,37 +14,29 @@ app.get("/", (request, res) => {
 
 
 app.get("/graph/:state", (request, response) => {
-  // make api call using fetch
-  // console.log(request.params.state);
   const state = request.params.state;
   const api_url = `http://coronavirusapi.com/getTimeSeries/${state}`;
   fetch(api_url)
     .then((response) => {
-      // console.log(response);
       return response.text();
     })
     .then((text) => {
-      // console.log(text);
       let results = d3.csvParse(text);
-      console.log(results); // logs to server
-      response.send(results); // sends to frontend
+      console.log(results); 
+      response.send(results); 
     });
 });
 
 app.get("/nation", (request, response) => {
-  // make api call using fetch
-  // console.log(request.params.state);
   const api_url = `http://coronavirusapi.com/time_series.csv`;
   fetch(api_url)
     .then((response) => {
-      // console.log(response);
       return response.text();
     })
     .then((text) => {
-      // console.log(text);
       let results = d3.csvParse(text);
-      console.log(results); // logs to server
-      response.send(results); // sends to frontend
+      console.log(results); 
+      response.send(results); 
     });
 });
 
