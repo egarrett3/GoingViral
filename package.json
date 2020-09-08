@@ -41,7 +41,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node app.js",
     "webpack:watch": "webpack --watch --config webpack.dev.js",
-    "webpack:build": "webpack --config webpack.prod.js  --optimize-minimize"
+    "webpack:build": "webpack --config webpack.prod.js  --optimize-minimize",
+    "webpack:do": "webpack-dev-server --config webpack.dev.js"
   },
   "author": "Edward Garrett",
   "license": "ISC",

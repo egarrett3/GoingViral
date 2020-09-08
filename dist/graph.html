@@ -6,8 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <script src="https://d3js.org/d3.v4.min.js"></script>
+    <script src="https://d3js.org/topojson.v1.min.js"></script>
+    <script src="https://d3js.org/d3-array.v2.min.js"></script>
+    <script src="https://d3js.org/d3-geo.v2.min.js"></script>
+    <script src="https://d3js.org/d3-geo-projection.v3.min.js"></script>
+    <script src="https://d3js.org/d3-queue.v3.min.js"></script>
     <script src="https://unpkg.com/regenerator-runtime@0.13.1/runtime.js"></script>
-    <script src="https://unpkg.com/topojson-client@3"></script>
+    <script src="https://unpkg.com/topojson@3"></script>
     <link rel="stylesheet" href="./main.css" />
     <title>Document</title>
 </head>
@@ -35,9 +40,9 @@
                     <div class='state'>KS</div> 
                     <div class='state'>KY</div> 
                     <div class='state'>LA</div> 
-                    <div class='state'>ME </div> 
-                    <div class='state'>MD </div> 
-                    <div class='state'>MA </div> 
+                    <div class='state'>ME</div> 
+                    <div class='state'>MD</div> 
+                    <div class='state'>MA</div> 
                     <div class='state'>MI</div> 
                     <div class='state'>MN</div> 
                     <div class='state'>MS</div> 
@@ -71,6 +76,9 @@
             
         </div>
     </div>
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <script src="https://d3js.org/topojson.v1.min.js"></script>
+    <script src="https://d3js.org/queue.v1.min.js"></script>
     <script src="./main.js"></script>
 </body>
 <script>
@@ -87,17 +95,6 @@
         localStorage.setItem('graph', 'false');
     }
 
-    function removeOnUnload() {
-        window.addEventListener('unload', function () {
-            let grph = document.querySelector('svg');
-
-            while (grph.firstChild) {
-                grph.removeChild(grph.firstChild)
-            }
-        });
-        setGraphFalse()
-    }
-
     function removeChildren() {
         let grph = document.querySelector('svg');
         let tooltip = document.querySelector('.tooltip')
@@ -110,12 +107,13 @@
     
     function loadUSAData() {
         window.addEventListener('load', () => {
+            makeAMap();
             getCountry();
         });
         setGraphTrue();
     }
 
-   
+
     document.getElementById("scroll").addEventListener("scroll", function(){})
 
     if (document.querySelector('.state')) {
@@ -124,6 +122,7 @@
                 e.preventDefault();
                 removeChildren();
                 getState(e.currentTarget.textContent)
+                makeAMap(e.currentTarget.textContent)
             });
 
         })
@@ -161,9 +160,6 @@
         let width = 1450;
         let margin = 200;
 
-        let svg = d3.select('svg')
-        let path = d3.geoPath();
-        
         function commasForNums(x) {
             return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         }
@@ -178,43 +174,29 @@
             }
             return distinctVals;
         }
-
+        
         const distinctValues = clenseDups(data);
-
+        
         function secondsEpochToDate(seconds) {
             let d = new Date(seconds * 1000);
             let dt = d.toLocaleString();
             dt = dt.split(',')
-
+            
             return dt[0]
         }
-
+        
         if (!(document.querySelector('svg'))) {
-            let svg = d3.select("#graph")
-                .append('svg')
-                .attr("viewBox", [0, 0, width, height]); 
+        let svg = d3.select("#graph")
+            .append('svg')
+            .attr("viewBox", [0, 0, width, height]) 
         }
-
-        d3.json("https://unpkg.com/us-atlas@1/us/10m.json", function (error, us) {
-            if (error) throw error;
-
-            svg.append("path")
-                .attr("stroke", "#aaa")
-                .attr("stroke-width", 0.5)
-                .attr("d", path(topojson.mesh(us, us.objects.counties, function (a, b) { return a !== b && (a.id / 1000 | 0) === (b.id / 1000 | 0); })));
-
-            svg.append("path")
-                .attr("stroke-width", 0.5)
-                .attr("d", path(topojson.mesh(us, us.objects.states, function (a, b) { return a !== b; })));
-
-            svg.append("path")
-                .attr("d", path(topojson.feature(us, us.objects.nation)));
-        });
+        
+        let svg = d3.select('svg')
 
         d3.select('svg')
             .attr('height', height)
             .attr('width', width)
-
+        
         svg.append('text')
             .attr('x', 50)
             .attr('y', 50)
@@ -229,7 +211,6 @@
 
         let g = svg.append("g")
             .attr("transform", "translate(" + 100 + "," + 100 + ")")
-
 
         let xg = g.append("g")
             .attr("transform", "translate(-1," + (height - margin) + ")")
@@ -285,6 +266,52 @@
                     .duration('50')
                     .style('opacity', '0')
             });
+            
+            // map();
     }
+
+    function makeAMap(state) {
+        let stadt = state;
+        let width1 = 960;
+        let height1 = 600;
+
+        if (!(document.querySelector('svg'))) {
+            let svg1 = d3.select("#graph")
+                .append('svg')
+        }
+
+        let svg1 = d3.select('svg')
+            // .append('svg')
+            // .attr('width', width1)
+            // .attr('height', height1)
+            
+        const projection = d3.geoAlbersUsa().scale(500).translate([width1 / 3, height1 / 2.9])
+
+        const path = d3.geoPath().projection(projection)
+
+        let g = svg1.append("g")
+
+        queue()
+            .defer(d3.json, 'us.json')
+            .await(makeMap);
+
+        function makeMap(error, states) {
+            g.append("g")
+                .attr("id", "states")
+                .selectAll("path")
+                .data(topojson.feature(states, states.objects.usStates).features)
+                .enter().append("path")
+                .attr("d", path)
+                .attr("class", "state")
+
+            g.append("path")
+                .datum(topojson.mesh(states, states.objects.usStates, function (a, b) { return a.properties.STATE_ABBR === stadt || b.properties.STATE_ABBR === stadt; }))
+                .attr("id", "state-borders")
+                .attr("d", path);
+        }
+    };
+
+    
+
 </script>
 </html>
