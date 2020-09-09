@@ -20,60 +20,58 @@
 <body>
     <div id='graph-bckgrnd'>
         <div id='graph'>
-            
-                <div id='scroll'>
-                    <div class='state'>AL</div>
-                    <div class='state'>AK</div> 
-                    <div class='state'>AZ</div> 
-                    <div class='state'>AR</div>
-                    <div class='state'>CA</div> 
-                    <div class='state'>CO</div> 
-                    <div class='state'>CT</div> 
-                    <div class='state'>DE</div> 
-                    <div class='state'>FL</div> 
-                    <div class='state'>GA</div> 
-                    <div class='state'>HI</div> 
-                    <div class='state'>ID</div> 
-                    <div class='state'>IL</div> 
-                    <div class='state'>IN</div> 
-                    <div class='state'>IA</div> 
-                    <div class='state'>KS</div> 
-                    <div class='state'>KY</div> 
-                    <div class='state'>LA</div> 
-                    <div class='state'>ME</div> 
-                    <div class='state'>MD</div> 
-                    <div class='state'>MA</div> 
-                    <div class='state'>MI</div> 
-                    <div class='state'>MN</div> 
-                    <div class='state'>MS</div> 
-                    <div class='state'>MO</div> 
-                    <div class='state'>MT</div> 
-                    <div class='state'>NE</div> 
-                    <div class='state'>NV</div> 
-                    <div class='state'>NH</div> 
-                    <div class='state'>NJ</div> 
-                    <div class='state'>NM</div> 
-                    <div class='state'>NY</div> 
-                    <div class='state'>NC</div> 
-                    <div class='state'>ND</div> 
-                    <div class='state'>OH</div> 
-                    <div class='state'>OK</div> 
-                    <div class='state'>OR</div> 
-                    <div class='state'>PA</div> 
-                    <div class='state'>RI</div> 
-                    <div class='state'>SC</div> 
-                    <div class='state'>SD</div> 
-                    <div class='state'>TN</div> 
-                    <div class='state'>TX</div> 
-                    <div class='state'>UT</div> 
-                    <div class='state'>VT</div> 
-                    <div class='state'>VA</div> 
-                    <div class='state'>WA</div> 
-                    <div class='state'>WV</div> 
-                    <div class='state'>WI</div> 
-                    <div class='state'>WY</div>
-                </div>
-            
+            <div id='scroll'>
+                <div class='state'>AL</div>
+                <div class='state'>AK</div> 
+                <div class='state'>AZ</div> 
+                <div class='state'>AR</div>
+                <div class='state'>CA</div> 
+                <div class='state'>CO</div> 
+                <div class='state'>CT</div> 
+                <div class='state'>DE</div> 
+                <div class='state'>FL</div> 
+                <div class='state'>GA</div> 
+                <div class='state'>HI</div> 
+                <div class='state'>ID</div> 
+                <div class='state'>IL</div> 
+                <div class='state'>IN</div> 
+                <div class='state'>IA</div> 
+                <div class='state'>KS</div> 
+                <div class='state'>KY</div> 
+                <div class='state'>LA</div> 
+                <div class='state'>ME</div> 
+                <div class='state'>MD</div> 
+                <div class='state'>MA</div> 
+                <div class='state'>MI</div> 
+                <div class='state'>MN</div> 
+                <div class='state'>MS</div> 
+                <div class='state'>MO</div> 
+                <div class='state'>MT</div> 
+                <div class='state'>NE</div> 
+                <div class='state'>NV</div> 
+                <div class='state'>NH</div> 
+                <div class='state'>NJ</div> 
+                <div class='state'>NM</div> 
+                <div class='state'>NY</div> 
+                <div class='state'>NC</div> 
+                <div class='state'>ND</div> 
+                <div class='state'>OH</div> 
+                <div class='state'>OK</div> 
+                <div class='state'>OR</div> 
+                <div class='state'>PA</div> 
+                <div class='state'>RI</div> 
+                <div class='state'>SC</div> 
+                <div class='state'>SD</div> 
+                <div class='state'>TN</div> 
+                <div class='state'>TX</div> 
+                <div class='state'>UT</div> 
+                <div class='state'>VT</div> 
+                <div class='state'>VA</div> 
+                <div class='state'>WA</div> 
+                <div class='state'>WV</div> 
+                <div class='state'>WI</div> 
+                <div class='state'>WY</div>
+            </div>
         </div>
     </div>
     <script src="https://d3js.org/d3.v4.min.js"></script>
@@ -83,90 +81,45 @@
 </body>
 <script>
 
-    function getGraph() {
-        localStorage.getItem('graph')
-    }
+    let height = 800;
+    let width = 1450;
+    let margin = 200;
 
-    function setGraphTrue() {
-        localStorage.setItem('graph', 'true')
-    }
-
-    function setGraphFalse() {
-        localStorage.setItem('graph', 'false');
-    }
-
-    function removeChildren() {
-        let grph = document.querySelector('svg');
-        let tooltip = document.querySelector('.tooltip')
-
-        while (grph.firstChild) {
-            grph.removeChild(grph.firstChild)
-        }
-        tooltip.remove()
+    if (!(document.querySelector('svg'))) {
+        let svg = d3.select("#graph")
+            .append('svg')
+            .attr("viewBox", [0, 0, width, height]) 
     }
     
-    function loadUSAData() {
-        window.addEventListener('load', () => {
-            makeAMap();
-            getCountry();
-        });
-        setGraphTrue();
+    let svg = d3.select('svg')
+        .attr('height', height)
+        .attr('width', width)
+    
+        let xScale = d3.scaleBand().range([0, width - margin]).padding(0.09)
+        let yScale = d3.scaleLinear().range([height - margin, 0])
+        
+    function commasForNums(num) {
+        return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     }
-
-
-    document.getElementById("scroll").addEventListener("scroll", function(){})
-
-    if (document.querySelector('.state')) {
-        [...document.querySelectorAll('.state')].forEach(function(stadt) {
-            stadt.addEventListener('click', e => {
-                e.preventDefault();
-                removeChildren();
-                getState(e.currentTarget.textContent)
-                makeAMap(e.currentTarget.textContent)
-            });
-
-        })
-        setGraphTrue();
+    
+    function secondsEpochToDate(seconds) {
+        let d = new Date(seconds * 1000);
+        let dt = d.toLocaleString();
+        dt = dt.split(',')
+        
+        return dt[0]
     }
-
-    if (getGraph()) {
-        window.addEventListener('unload', function () {
-            removeChildren();
-        });
-        setGraphFalse();
-    } else {
-        loadUSAData();
-        setGraphTrue();
-    }
-
-    async function getState(state) {
-        const api_url = `/graph/${state}`;
-        const response = await fetch(api_url);
-        const text = await response.text();
-        graph(text);
-    }
-
-    async function getCountry() {
-        const api_url = `/nation`;
-        const response = await fetch(api_url);
-        const text = await response.text();
-        graph(text);
-    }
-
-    function graph(DATA) {
-        const data = JSON.parse(DATA);
-
-        let height = 800;
-        let width = 1450;
-        let margin = 200;
-
-        function commasForNums(x) {
-            return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-        }
+    
+    let div = d3.select('body').append('div')
+        .style('opacity', '0')
+        .attr('class', 'tooltip')
+        
+    function graph(datum) {
+        let data = JSON.parse(datum)
 
         function clenseDups(data) {
             const distinctVals = [];
-
+            
             for (let index = 0; index < data.length; index++) {
                 if (index !== 0 && secondsEpochToDate(data[index].seconds_since_Epoch) !== secondsEpochToDate(data[index - 1].seconds_since_Epoch)) {
                     distinctVals.push(data[index])
@@ -174,44 +127,38 @@
             }
             return distinctVals;
         }
-        
-        const distinctValues = clenseDups(data);
-        
-        function secondsEpochToDate(seconds) {
-            let d = new Date(seconds * 1000);
-            let dt = d.toLocaleString();
-            dt = dt.split(',')
-            
-            return dt[0]
-        }
-        
-        if (!(document.querySelector('svg'))) {
-        let svg = d3.select("#graph")
-            .append('svg')
-            .attr("viewBox", [0, 0, width, height]) 
-        }
-        
-        let svg = d3.select('svg')
 
-        d3.select('svg')
-            .attr('height', height)
-            .attr('width', width)
-        
+        function caseFatalityRate(data) {
+            let totalPositive = 0;
+            let totalDeaths = 0;
+            
+            totalPositive = parseInt(data[data.length-1].positive);
+            totalDeaths = parseInt(data[data.length-1].deaths);
+            
+            return ((totalDeaths / totalPositive)*100).toFixed(2)
+        }
+
         svg.append('text')
             .attr('x', 50)
             .attr('y', 50)
             .attr('font-size', '30px')
             .text('Tested, Confirmed, Deaths')
 
-        let xScale = d3.scaleBand().range([0, width - margin]).padding(0.09)
-            .domain(distinctValues.map(time => secondsEpochToDate(time.seconds_since_Epoch)))
+        svg.append('text')
+            .attr('x', 800)
+            .attr('y', 50)
+            .attr('font-size','30px')
+            .text(`Case-Fatality Rate: ${caseFatalityRate(data)}%` )
 
-        let yScale = d3.scaleLinear().range([height - margin, 0])
-            .domain([0, d3.max(distinctValues, function (dt) { return parseInt(dt.tested) })]) 
+        const distinctValues = clenseDups(data);
+
+        xScale.domain(distinctValues.map(time => secondsEpochToDate(time.seconds_since_Epoch)))
+        yScale.domain([0, d3.max(distinctValues, function (dt) { return parseInt(dt.tested) })]) 
 
         let g = svg.append("g")
             .attr("transform", "translate(" + 100 + "," + 100 + ")")
-
+            .attr('id','anchor')
+    
         let xg = g.append("g")
             .attr("transform", "translate(-1," + (height - margin) + ")")
             .call(d3.axisBottom(xScale))
@@ -219,8 +166,8 @@
             .attr('dx', '-3.2em')
             .attr('dy', '.35em')
             .attr('transform', 'rotate(-70)')
-
-        g.append("g")
+    
+        let yg = g.append("g")
             .call(d3.axisLeft(yScale))
             .append("text")
             .attr("transform", "rotate(-90)")
@@ -231,32 +178,34 @@
             .text("Tests")
             .attr('x','25px')
             .attr('y','25px');
-
-        let div = d3.select('body').append('div')
-            .style('opacity', '0')
-            .attr('class', 'tooltip')
-
-        g.selectAll(".rect")
+            
+        let rectangles = g.selectAll(".rect")
             .data(distinctValues)
             .enter().append("rect")
             .attr("class", "bar")
-            .attr("x", function (distinctValues) { return xScale(secondsEpochToDate(distinctValues.seconds_since_Epoch)) })
-            .attr("y", function (distinctValues) { return yScale(distinctValues.tested) })
             .attr("width", xScale.bandwidth())
+            .attr("x", function (distinctValues) { return xScale(secondsEpochToDate(distinctValues.seconds_since_Epoch)) })
+            .attr('height','0')
+            .attr('y', function(d) { return yScale(0) })
+            
+        rectangles.transition()
+            .duration(2000)
+            .attr("y", function (distinctValues) { return yScale(distinctValues.tested) })
             .attr("height", function (distinctValues) { return ((height - margin) - yScale(distinctValues.tested)) })
-            .on('mouseover', function (d, i) {
-                d3.select(this).transition()
-                    .duration('50')
-                    .attr('opacity', '.85')
-                div.transition()
-                    .duration('50')
-                    .style('opacity', '1')
-                div.html('date: ' + secondsEpochToDate(distinctValues[i].seconds_since_Epoch) + 
-                    '<br>tested cases: ' + commasForNums(distinctValues[i].tested) +
-                    '<br>positive cases: ' + commasForNums(distinctValues[i].positive) + 
-                    '<br>resulting deaths: ' + commasForNums(distinctValues[i].deaths))
-                    .style('left', (d3.event.clientX - 13) + 'px')
-                    .style('top', (d3.event.clientY - 60) + 'px')
+            
+        rectangles.on('mouseover', function (d, i) {
+            d3.select(this).transition()
+                .duration('50')
+                .attr('opacity', '.85')
+            div.transition()
+                .duration('50')
+                .style('opacity', '1')
+            div.html('date: ' + secondsEpochToDate(distinctValues[i].seconds_since_Epoch) + 
+                '<br>tested cases: ' + commasForNums(distinctValues[i].tested) +
+                '<br>positive cases: ' + commasForNums(distinctValues[i].positive) + 
+                '<br>resulting deaths: ' + commasForNums(distinctValues[i].deaths))
+                .style('left', (d3.event.clientX - 13) + 'px')
+                .style('top', (d3.event.clientY - 60) + 'px')
             })
             .on('mouseout', function (d, i) {
                 d3.select(this).transition()
@@ -266,8 +215,6 @@
                     .duration('50')
                     .style('opacity', '0')
             });
-            
-            // map();
     }
 
     function makeAMap(state) {
@@ -281,9 +228,6 @@
         }
 
         let svg1 = d3.select('svg')
-            // .append('svg')
-            // .attr('width', width1)
-            // .attr('height', height1)
             
         const projection = d3.geoAlbersUsa().scale(500).translate([width1 / 3, height1 / 2.9])
 
@@ -309,7 +253,7 @@
                 .attr("id", "state-borders")
                 .attr("d", path);
         }
-    };
+    }
 
     
 

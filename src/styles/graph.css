@@ -14,6 +14,12 @@ div.tooltip {
 rect.bar {
     fill: rgb(153, 62, 1);
 }
+rect.bar1 {
+    fill: rgb(121, 48, 0);
+}
+rect.bar2 {
+    fill: rgb(92, 37, 0);
+}
 
 
 div#graph{
