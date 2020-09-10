@@ -95,8 +95,8 @@
         .attr('height', height)
         .attr('width', width)
     
-        let xScale = d3.scaleBand().range([0, width - margin]).padding(0.09)
-        let yScale = d3.scaleLinear().range([height - margin, 0])
+    let xScale = d3.scaleBand().range([0, width - margin]).padding(0.09)
+    let yScale = d3.scaleLinear().range([height - margin, 0])
         
     function commasForNums(num) {
         return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -139,12 +139,21 @@
         }
 
         svg.append('text')
+            .attr('class','headers')
             .attr('x', 50)
             .attr('y', 50)
             .attr('font-size', '30px')
             .text('Coronavirus Cases')
 
         svg.append('text')
+            .attr('class','headers')
+            .attr('x', 25)
+            .attr('y', 100)
+            .attr('font-size', '15px')
+            .text('Tests')
+
+        svg.append('text')
+            .attr('class', 'headers')
             .attr('x', 800)
             .attr('y', 50)
             .attr('font-size','30px')
@@ -155,29 +164,51 @@
         xScale.domain(distinctValues.map(time => secondsEpochToDate(time.seconds_since_Epoch)))
         yScale.domain([0, d3.max(distinctValues, function (dt) { return parseInt(dt.tested) })]) 
 
-        let g = svg.append("g")
-            .attr("transform", "translate(" + 100 + "," + 100 + ")")
-            .attr('id','anchor')
-    
-        let xg = g.append("g")
+        if (!(document.querySelector('#anchor'))) {
+            svg.append("g")
+                .attr("transform", "translate(" + 100 + "," + 100 + ")")
+                .attr('id','anchor')
+        } 
+        
+        let g = d3.select("#anchor")
+            
+        if (!(document.querySelector('#xtick'))) {
+            g.append("g")
+                .attr('id','xtick')
+                .attr("transform", "translate(-1," + (height - margin) + ")")
+                .transition().duration(2000)
+                .call(d3.axisBottom(xScale))
+                .selectAll('text')
+                .attr('dx', '-3.2em')
+                .attr('dy', '.35em')
+                .attr('transform', 'rotate(-70)')
+        } 
+
+        let xg = g.select("#xtick")
             .attr("transform", "translate(-1," + (height - margin) + ")")
+            .transition().duration(2000)
             .call(d3.axisBottom(xScale))
             .selectAll('text')
             .attr('dx', '-3.2em')
             .attr('dy', '.35em')
             .attr('transform', 'rotate(-70)')
     
-        let yg = g.append("g")
+        if (!(document.querySelector('#ytick'))) {
+            g.append("g")
+                .attr('id','ytick')
+                .transition().duration(2000)
+                .call(d3.axisLeft(yScale))
+                .selectAll("text")
+                .attr("transform", "rotate(0)")
+        } 
+
+        let yg = g.select("#ytick")
+            .attr('id', 'ytick')
+            .transition().duration(2000)
             .call(d3.axisLeft(yScale))
-            .append("text")
-            .attr("transform", "rotate(-90)")
-            .attr("y", 6)
-            .attr("dy", "-7.1em")
-            .attr("text-anchor", "end")
-            .attr("stroke", "black")
-            .text("Tests")
-            .attr('x','25px')
-            .attr('y','25px');
+            .selectAll("text")
+            .attr("transform", "rotate(0)")
+        
             
         let rectangles = g.selectAll(".rect")
             .data(distinctValues)
@@ -189,7 +220,7 @@
             .attr('y', function(d) { return yScale(0) })
             
         rectangles.transition()
-            .duration(2000)
+            .duration(1500)
             .attr("y", function (distinctValues) { return yScale(distinctValues.tested) })
             .attr("height", function (distinctValues) { return ((height - margin) - yScale(distinctValues.tested)) })
             
@@ -215,6 +246,16 @@
                     .duration('50')
                     .style('opacity', '0')
             });
+    }
+
+    function transitionDown() {
+        let g = d3.select('#anchor')
+        let rectangles = g.selectAll(".bar")
+            
+        rectangles.transition()
+            .duration(1000)
+            .attr('y', function (d) { return yScale(0) })
+            .attr('height', '0')
     }
 
     function makeAMap(state) {

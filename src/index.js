@@ -1,6 +1,6 @@
 import './styles/index.css';
 import './styles/graph.css';
-
+import { transition } from 'd3';
 
 
 function getGraph() {
@@ -15,12 +15,11 @@ function setGraphFalse() {
     localStorage.setItem('graph', 'false');
 }
 
-function removeChildren() {
-    let grph = document.querySelector('svg');
-
-    while (grph.firstChild) {
-        grph.removeChild(grph.firstChild)
-    }
+async function removeChildren() {
+    document.querySelectorAll('rect').forEach(r => r.parentNode.removeChild(r))
+    document.querySelectorAll('.headers').forEach(r => r.parentNode.removeChild(r))
+    document.querySelectorAll('#states').forEach(r => r.parentNode.removeChild(r))
+    document.querySelectorAll('#state-borders').forEach(r => r.parentNode.removeChild(r))
 }
 
 function loadUSAData() {
@@ -31,19 +30,24 @@ function loadUSAData() {
     setGraphTrue();
 }
 
-document.getElementById("scroll").addEventListener("scroll", function () { })
+document.getElementById("scroll").addEventListener("scroll", function () {})
 
-if (document.querySelector('.state')) {
-    [...document.querySelectorAll('.state')].forEach(function (stadt) {
-        stadt.addEventListener('click', e => {
-            e.preventDefault();
-            removeChildren();
-            getState(e.currentTarget.textContent)
-            makeAMap(e.currentTarget.textContent)
-        });
-    })
-    setGraphTrue();
+function transitionTiming() { 
+    if (document.querySelector('.state')) {
+        [...document.querySelectorAll('.state')].forEach(function (stadt) {
+            stadt.addEventListener('click', e => {
+                e.preventDefault();
+                transitionDown();
+                setTimeout(removeChildren,1500);
+                setTimeout(getState.bind(null,e.currentTarget.textContent),2100);
+                setTimeout(makeAMap.bind(null,e.currentTarget.textContent),2100);
+            });
+        })
+        setGraphTrue();
+    }
 }
+
+transitionTiming()
 
 if (getGraph()) {
     window.addEventListener('unload', function () {
