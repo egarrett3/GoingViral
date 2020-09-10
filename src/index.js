@@ -17,8 +17,7 @@ function setGraphFalse() {
 
 async function removeChildren() {
     document.querySelectorAll('rect').forEach(r => r.parentNode.removeChild(r))
-    document.querySelectorAll('.headers').forEach(r => r.parentNode.removeChild(r))
-    document.querySelectorAll('#states').forEach(r => r.parentNode.removeChild(r))
+    document.querySelectorAll('.rate').forEach(r => r.parentNode.removeChild(r))
     document.querySelectorAll('#state-borders').forEach(r => r.parentNode.removeChild(r))
 }
 
@@ -39,8 +38,8 @@ function transitionTiming() {
                 e.preventDefault();
                 transitionDown();
                 setTimeout(removeChildren,1500);
-                setTimeout(getState.bind(null,e.currentTarget.textContent),2100);
-                setTimeout(makeAMap.bind(null,e.currentTarget.textContent),2100);
+                setTimeout(getState.bind(null,e.currentTarget.textContent),1800);
+                setTimeout(makeAMap.bind(null,e.currentTarget.textContent),1800);
             });
         })
         setGraphTrue();

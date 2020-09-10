@@ -138,26 +138,41 @@
             return ((totalDeaths / totalPositive)*100).toFixed(2)
         }
 
+        if (!(document.querySelector('.title'))) {
+            svg.append('text')
+                .attr('class','title')
+                .attr('x', 50)
+                .attr('y', 50)
+                .attr('font-size', '30px')
+                .text('Coronavirus Cases')
+
+        } 
+        
+        if (!(document.querySelector('.axistitle'))) {
+            svg.append('text')
+                .attr('class','axistitle')
+                .attr('x', 25)
+                .attr('y', 100)
+                .attr('font-size', '15px')
+                .text('Tests')
+        }
+
+        if (!(document.querySelector('.headers'))) {
+            svg.append('text')
+                .attr('class', 'headers')
+                .attr('x', 800)
+                .attr('y', 50)
+                .attr('font-size','30px')
+                .text(`Case Fatality Rate:`)
+        }
+
         svg.append('text')
-            .attr('class','headers')
-            .attr('x', 50)
+            .attr('class', 'rate')
+            .attr('x', 1035)
             .attr('y', 50)
             .attr('font-size', '30px')
-            .text('Coronavirus Cases')
+            .text(`${caseFatalityRate(data)}%`)
 
-        svg.append('text')
-            .attr('class','headers')
-            .attr('x', 25)
-            .attr('y', 100)
-            .attr('font-size', '15px')
-            .text('Tests')
-
-        svg.append('text')
-            .attr('class', 'headers')
-            .attr('x', 800)
-            .attr('y', 50)
-            .attr('font-size','30px')
-            .text(`Case Fatality Rate: ${caseFatalityRate(data)}%` )
 
         const distinctValues = clenseDups(data);
 
@@ -281,13 +296,15 @@
             .await(makeMap);
 
         function makeMap(error, states) {
-            g.append("g")
-                .attr("id", "states")
-                .selectAll("path")
-                .data(topojson.feature(states, states.objects.usStates).features)
-                .enter().append("path")
-                .attr("d", path)
-                .attr("class", "state")
+            if (!(document.querySelector('#states'))) {
+                g.append("g")
+                    .attr("id", "states")
+                    .selectAll("path")
+                    .data(topojson.feature(states, states.objects.usStates).features)
+                    .enter().append("path")
+                    .attr("d", path)
+                    .attr("class", "state")
+            }
 
             g.append("path")
                 .datum(topojson.mesh(states, states.objects.usStates, function (a, b) { return a.properties.STATE_ABBR === stadt || b.properties.STATE_ABBR === stadt; }))
