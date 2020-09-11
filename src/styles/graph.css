@@ -23,7 +23,7 @@ rect.bar2 {
 
 
 div#graph{
-    position: absolute;
+    position: relative;
 }
 
 div#scroll {
@@ -52,12 +52,11 @@ div#scroll::-webkit-scrollbar {
 }
 
 div#scroll > div {
-    box-sizing: border-box;
-    
+    box-sizing: content-box;
     font-size: 30px;
     font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     width: 45px;
-    height: 45px;
+    height: 55px;
     cursor: pointer;
     -webkit-transform: rotate(90deg);
     transform: rotate(90deg);
@@ -66,7 +65,7 @@ div#scroll > div {
 
 div.state {
     display:flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
 }
 
@@ -82,4 +81,15 @@ div.state {
     stroke-linejoin: round;
     stroke-linecap: round;
     pointer-events: none;
+}
+
+#covid-19 {
+    height: 75%;
+    width: 75%;
+    display: inline-block;
+    position: absolute;
+    left: 200px;
+    top: 145px;
+    z-index: -1;
+    opacity: .5;
 }

@@ -20,6 +20,7 @@
 <body>
     <div id='graph-bckgrnd'>
         <div id='graph'>
+            <img id='covid-19' src='/images/23311.png'>
             <div id='scroll'>
                 <div class='state'>AL</div>
                 <div class='state'>AK</div> 
@@ -160,16 +161,16 @@
         if (!(document.querySelector('.headers'))) {
             svg.append('text')
                 .attr('class', 'headers')
-                .attr('x', 800)
-                .attr('y', 50)
+                .attr('x', 950)
+                .attr('y', 45)
                 .attr('font-size','30px')
                 .text(`Case Fatality Rate:`)
         }
 
         svg.append('text')
             .attr('class', 'rate')
-            .attr('x', 1035)
-            .attr('y', 50)
+            .attr('x', 1185)
+            .attr('y', 45)
             .attr('font-size', '30px')
             .text(`${caseFatalityRate(data)}%`)
 
@@ -289,7 +290,12 @@
 
         const path = d3.geoPath().projection(projection)
 
-        let g = svg1.append("g")
+        if (!(document.querySelector('#MapG'))) {
+            svg1.append("g")
+                .attr('id','MapG')
+        }
+
+        let g = d3.select('#MapG')
 
         queue()
             .defer(d3.json, 'us.json')
@@ -305,11 +311,12 @@
                     .attr("d", path)
                     .attr("class", "state")
             }
-
+            
             g.append("path")
                 .datum(topojson.mesh(states, states.objects.usStates, function (a, b) { return a.properties.STATE_ABBR === stadt || b.properties.STATE_ABBR === stadt; }))
                 .attr("id", "state-borders")
                 .attr("d", path);
+        
         }
     }
 
