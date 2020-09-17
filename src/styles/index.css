@@ -1,11 +1,13 @@
 body {
     margin: 0;
     height: 100%;
-    width: 100%
+    width: 100%;
 }
 
 figure {
     position: absolute;
+    height:100%;
+    width:100%;
     margin: 0;
 }
 
@@ -86,21 +88,27 @@ circle {
 }
 
 #home-page-header {
+    width: 500px;
+    height: 100px;
     display: flex;
     flex-direction: column;
     align-items: flex-end;
     position: absolute;
-    z-index: 1;
     top: 1%;
-    right: 4%;
+    right: 1%;
 }
 
-#stats-header{
+#stats-header {
+    display: block;
     text-decoration:underline;
+    font-size: xx-large;
+    font-family:courier,arial,helvetica;
 }
 
 .country {
     display: block;
+    font-weight: xx-large;
+    font-family:courier,arial,helvetica;
     text-decoration: none;
     font-weight: bolder;
     background: -webkit-linear-gradient(270deg,rgb(245, 0, 0),rgb(255, 255, 255),rgb(2, 6, 241));
@@ -109,5 +117,17 @@ circle {
     -webkit-text-fill-color: transparent;
     font-size: xxx-large;
     margin-right: 5px;
+    cursor: pointer;
 }
 
+.description {
+    font-family:courier,arial,helvetica;
+    font-weight: bold;
+    position: absolute;
+    top: 50%;
+    left: 12%;
+    display:flex;
+    justify-content: flex-end;
+    height: 100px;
+    width: 200px;
+}

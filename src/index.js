@@ -1,18 +1,13 @@
 import './styles/index.css';
 import './styles/graph.css';
-import { transition } from 'd3';
 
-
-function getGraph() {
-    localStorage.getItem('graph')
-}
-
-function setGraphTrue() {
-    localStorage.setItem('graph', 'true')
-}
-
-function setGraphFalse() {
-    localStorage.setItem('graph', 'false');
+function pageLocation() {
+    let curr = location.href;
+    if (curr.includes('graph')) {
+        return true;
+    } else {
+        return false;
+    }
 }
 
 async function removeChildren() {
@@ -22,14 +17,25 @@ async function removeChildren() {
 }
 
 function loadUSAData() {
-    window.addEventListener('load', () => {
-        makeAMap();
-        getCountry();
-    });
-    setGraphTrue();
+    makeAMap();
+    getCountry();
 }
 
-document.getElementById("scroll").addEventListener("scroll", function () {})
+window.addEventListener('beforeunload', function () {
+    removeChildren();
+});
+
+if (pageLocation()) {
+    window.addEventListener('load', function() {
+        loadUSAData();
+    });
+} 
+
+
+if (document.getElementById("scroll")) {
+    addEventListener("scroll", function () {})
+}
+
 
 function transitionTiming() { 
     if (document.querySelector('.state')) {
@@ -42,21 +48,12 @@ function transitionTiming() {
                 setTimeout(makeAMap.bind(null,e.currentTarget.textContent),1800);
             });
         })
-        setGraphTrue();
     }
 }
 
+
 transitionTiming()
 
-if (getGraph()) {
-    window.addEventListener('unload', function () {
-        removeChildren();
-    });
-    setGraphFalse();
-} else {
-    loadUSAData();
-    setGraphTrue();
-}
 
 async function getState(state) {
     const api_url = `/graph/${state}`;
