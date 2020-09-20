@@ -8,7 +8,7 @@ div#author {
     position: absolute;
     width: 350px;
     top: 4%;
-    left: 77%;
+    left: 50%;
 }
 
 .links {
@@ -53,10 +53,6 @@ rect.bar2 {
     fill: rgb(92, 37, 0);
 }
 
-
-div#graph{
-    position: relative;
-}
 
 div#scroll {
     /* scroll-padding: auto; */
@@ -122,9 +118,14 @@ div.state {
     width: 75%;
     display: inline-block;
     position: absolute;
-    left: 400px;
-    top: 320px;
+    left: 100px;
+    top: 250px;
     z-index: -1;
     opacity: .5;
-}
+} 
 
+#pos {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
