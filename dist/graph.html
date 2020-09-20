@@ -112,15 +112,12 @@
         let svg = d3.select("#graph")
             .append('svg')
             .attr('id','pos')
-            // .attr('preserveAspectRatio','xMinYMin meet')
-            // .attr("viewBox", [0, 0, width , height ]) 
     }
     
     let svg = d3.select('svg')
         .attr('id', 'pos')
         .attr('height', height + 150)
         .attr('width', width)
-        // .attr('preserveAspectRatio','xMinYMin meet')
     
     let xScale = d3.scaleBand().range([0, width - margin + 100]).padding(0.09)
     let yScale = d3.scaleLinear().range([height - margin, 0])
@@ -180,7 +177,7 @@
             svg.append('text')
                 .attr('class','axistitle')
                 .attr('x', 40)
-                .attr('y', 190)
+                .attr('y', 240)
                 .attr('font-size', '15px')
                 .style('font-family', 'courier,arial,helvetica')
                 .text('Tests')
@@ -300,11 +297,11 @@
                 .duration('50')
                 .style('opacity', '1')
             div.html('date: ' + secondsEpochToDate(distinctValues[i].seconds_since_Epoch) + 
-                '<br>tested cases: ' + commasForNums(distinctValues[i].tested) +
-                '<br>positive cases: ' + commasForNums(distinctValues[i].positive) + 
-                '<br>resulting deaths: ' + commasForNums(distinctValues[i].deaths))
-                .style('left', (d3.event.clientX - 13) + 'px')
-                .style('top', (d3.event.clientY - 60) + 'px')
+                '<br>tested: ' + commasForNums(distinctValues[i].tested) +
+                '<br>positives: ' + commasForNums(distinctValues[i].positive) + 
+                '<br>deaths: ' + commasForNums(distinctValues[i].deaths))
+                .style('left', ( 1070) + 'px')
+                .style('top', ( 140) + 'px')
             })
             .on('mouseout', function (d, i) {
                 d3.select(this).transition()
@@ -338,14 +335,14 @@
 
         let svg1 = d3.select('svg')
             
-        const projection = d3.geoAlbersUsa().scale(300).translate([width1 / 3, height1 / 2.9])
+        const projection = d3.geoAlbersUsa().scale(350).translate([width1 / 3, height1 / 2.9])
 
         const path = d3.geoPath().projection(projection)
 
         if (!(document.querySelector('#MapG'))) {
             svg1.append("g")
                 .attr('id','MapG')
-                .attr("transform", "translate(" + -70 + "," + -150 + ")")
+                .attr("transform", "translate(" + -150 + "," + -70 + ")")
         }
 
         let g = d3.select('#MapG')
