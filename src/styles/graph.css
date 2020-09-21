@@ -1,20 +1,20 @@
 h1 {
     position: absolute;
-    top: 4%;
-    left: 6%;
+    top: 0%;
+    left: 4%;
 }
 
 div#author {
     position: absolute;
     width: 350px;
-    top: 4%;
-    left: 50%;
+    top: 0%;
+    left: 80%;
 }
 
 .links {
     margin: 0;
     position: absolute;
-    left: 25%;
+    left: 0%;
     display: flex;
     flex-direction: row;
     list-style: none;
@@ -25,8 +25,10 @@ div#author {
 }
 
 .aboutPage {
+    display: block;
+    width: 620px;
     position: absolute;
-    top: 2%;
+    top: 0%;
     left: 25%;
     font-family: courier,arial,helvetica;
 }
@@ -55,11 +57,11 @@ rect.bar2 {
 
 
 div#scroll {
-    /* scroll-padding: auto; */
+    scroll-padding: auto;
     display: block;
     position: relative;
-    left: 42%;
-    top: 300px;
+    left: 28%;
+    top: 170px;
     width: 45px;
     height: 90px;
     margin: 0;
@@ -118,8 +120,8 @@ div.state {
     width: 75%;
     display: inline-block;
     position: absolute;
-    left: 100px;
-    top: 250px;
+    left: 290px;
+    top: 150px;
     z-index: -1;
     opacity: .5;
 } 
