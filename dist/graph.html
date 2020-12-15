@@ -156,22 +156,12 @@
             let totalPositive = 0;
             let totalDeaths = 0;
             
-            totalPositive = parseInt(data[data.length-1].positive);
-            totalDeaths = parseInt(data[data.length-1].deaths);
-            
+            totalPositive = parseInt(data[0].positive);
+            totalDeaths = parseInt(data[0].deaths);
+            debugger
             return ((totalDeaths / totalPositive)*100).toFixed(2)
         }
 
-        // if (!(document.querySelector('.title'))) {
-        //     svg.append('text')
-        //         .attr('class','title')
-        //         .attr('x', 50)
-        //         .attr('y', 150)
-        //         .attr('font-size', '30px')
-        //         .style('font-family','courier,arial,helvetica')
-        //         .text('Coronavirus Cases')
-
-        // } 
         
         if (!(document.querySelector('.axistitle'))) {
             svg.append('text')

@@ -15,12 +15,13 @@ app.get("/", (request, res) => {
 
 app.get("/graph/:state", (request, response) => {
   const state = request.params.state;
-  const api_url = `http://coronavirusapi.com/getTimeSeries/${state}`;
+  const api_url = `https://api.covidtracking.com/v1/states/${state}/current.json`;
   fetch(api_url)
     .then((response) => {
       return response.text();
     })
     .then((text) => {
+      debugger
       let results = d3.csvParse(text);
       console.log(results); 
       response.send(results); 
@@ -28,7 +29,7 @@ app.get("/graph/:state", (request, response) => {
 });
 
 app.get("/nation", (request, response) => {
-  const api_url = `http://coronavirusapi.com/time_series.csv`;
+  const api_url = `https://api.covidtracking.com/v1/us/current.csv`;
   fetch(api_url)
     .then((response) => {
       return response.text();
