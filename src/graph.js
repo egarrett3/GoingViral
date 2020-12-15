@@ -2,7 +2,7 @@ import './styles/index.css';
 import './styles/graph.css';
 
 export default function(DATA) {
-    
+    debugger
 const data = DATA;
 
 let d3 = require("d3");

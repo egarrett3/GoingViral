@@ -126,11 +126,16 @@
         return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     }
     
-    function secondsEpochToDate(seconds) {
+    function secondsEpochToDate(date) {
+        let year = date.slice(0,4)
+        let month = date.slice(4,6)
+        let day = date.slice(6,8)
+        debugger
+
         let d = new Date(seconds * 1000);
         let dt = d.toLocaleString();
         dt = dt.split(',')
-        
+        debugger
         return dt[0]
     }
     
@@ -140,17 +145,20 @@
         
     function graph(datum) {
         let data = JSON.parse(datum)
-
-        function clenseDups(data) {
-            const distinctVals = [];
+        debugger
+        // function clenseDups(data) {
+        //     const distinctVals = [];
             
-            for (let index = 0; index < data.length; index++) {
-                if (index !== 0 && secondsEpochToDate(data[index].seconds_since_Epoch) !== secondsEpochToDate(data[index - 1].seconds_since_Epoch)) {
-                    distinctVals.push(data[index])
-                };
-            }
-            return distinctVals;
-        }
+        //     for (let index = 0; index < data.length; index++) {
+        //         debugger
+        //         if (index !== 0 && secondsEpochToDate(data[0].date) !== secondsEpochToDate(data[index - 1].date)) {
+        //             debugger
+        //             distinctVals.push(data[index])
+        //         };
+        //     }
+        //     debugger
+        //     return distinctVals;
+        // }
 
         function caseFatalityRate(data) {
             let totalPositive = 0;
@@ -160,7 +168,7 @@
             totalDeaths = parseInt(data[0].death);
             debugger
             return ((totalDeaths / totalPositive)*100).toFixed(2)
-        }
+        } https://api.covidtracking.com/v1/us/daily.json
 
         
         if (!(document.querySelector('.axistitle'))) {
@@ -202,9 +210,9 @@
             .text(`${caseFatalityRate(data)}%`)
 
 
-        const distinctValues = clenseDups(data);
-
-        xScale.domain(distinctValues.map(time => secondsEpochToDate(time.seconds_since_Epoch)))
+        const distinctValues = data;
+        debugger
+        xScale.domain(distinctValues.map(time => secondsEpochToDate(time.date)))
         yScale.domain([0, d3.max(distinctValues, function (dt) { return parseInt(dt.tested) })]) 
 
         if (!(document.querySelector('#anchor'))) {
