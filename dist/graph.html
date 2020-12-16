@@ -273,7 +273,7 @@
             .attr('height','0')
             .attr('y', function(d) { return yScale(0) })
             
-        rectangles.transition()
+        rectangles.transition('extend')
             .duration(1500)
             .attr("y", function (distinctValues) { return yScale(distinctValues.positive) })
             .attr("height", function (distinctValues) { return ((height - margin) - yScale(distinctValues.positive)) })
@@ -306,7 +306,7 @@
         let g = d3.select('#anchor')
         let rectangles = g.selectAll(".bar")
             
-        rectangles.transition()
+        rectangles.transition('narrow')
             .duration(1000)
             .attr('y', function (d) { return yScale(0) })
             .attr('height', '0')
