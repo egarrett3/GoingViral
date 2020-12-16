@@ -21,7 +21,6 @@ app.get("/graph/:state", (request, response) => {
       return response.text();
     })
     .then((text) => {
-      debugger
       let results = d3.csvParse(text);
       console.log(results); 
       response.send(results); 
@@ -35,7 +34,6 @@ app.get("/nation", (request, response) => {
       return response.text();
     })
     .then((text) => {
-      debugger
       let results = d3.csvParse(text);
       console.log(results); 
       response.send(results); 

@@ -6,7 +6,6 @@ class Graph {
     }
 
     formGelements() {
-        debugger
         const svg = d3.create('svg')
             .attr('viewbox', [0,0,300,300]);
         

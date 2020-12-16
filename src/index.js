@@ -44,8 +44,8 @@ function transitionTiming() {
                 e.preventDefault();
                 transitionDown();
                 setTimeout(removeChildren,1500);
-                setTimeout(getState.bind(null,e.currentTarget.textContent),1800);
-                setTimeout(makeAMap.bind(null,e.currentTarget.textContent),1800);
+                setTimeout(getState.bind(null,(e.currentTarget.textContent.toLowerCase())),1800);
+                setTimeout(makeAMap.bind(null,(e.currentTarget.textContent.toLowerCase())),1800);
             });
         })
     }
@@ -59,7 +59,6 @@ async function getState(state) {
     const api_url = `/graph/${state}`;
     const response = await fetch(api_url);
     const text = await response.text();
-    debugger
     graph(text);
 }
 
@@ -67,6 +66,5 @@ async function getCountry() {
     const api_url = `/nation`;
     const response = await fetch(api_url);
     const text = await response.text();
-    debugger
     graph(text);
 }

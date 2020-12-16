@@ -46,56 +46,56 @@
         </div>
         <img id='covid-19' src='/images/23311.png'>
                 <div id='scroll'>
-                    <div class='state'>al</div>
-                    <div class='state'>ak</div> 
-                    <div class='state'>az</div> 
-                    <div class='state'>ar</div>
-                    <div class='state'>ca</div> 
-                    <div class='state'>co</div> 
-                    <div class='state'>ct</div> 
-                    <div class='state'>de</div> 
-                    <div class='state'>fl</div> 
-                    <div class='state' style='height:50px'>ga</div> 
-                    <div class='state' style='height:55px'>hi</div> 
-                    <div class='state' style='height:40px'>id</div> 
-                    <div class='state'>il</div> 
-                    <div class='state'>in</div> 
-                    <div class='state'>ia</div> 
-                    <div class='state'>ks</div> 
-                    <div class='state'>ky</div> 
-                    <div class='state'>la</div> 
-                    <div class='state' style='height:55px'>me</div> 
-                    <div class='state' style='height:55px'>md</div> 
-                    <div class='state' style='height:65px'>ma</div> 
-                    <div class='state' style='height:45px'>mi</div> 
-                    <div class='state' style='height:60px'>mn</div> 
-                    <div class='state' style='height:55px'>ms</div> 
-                    <div class='state' style='height:55px'>mo</div> 
-                    <div class='state' style='height:55px'>mt</div> 
-                    <div class='state'>ne</div> 
-                    <div class='state'>nv</div> 
-                    <div class='state' style='height:55px'>nh</div> 
-                    <div class='state' style='height:55px'>nj</div> 
-                    <div class='state' style='height:55px'>nm</div> 
-                    <div class='state' style='height:65px'>ny</div> 
-                    <div class='state'>nc</div> 
-                    <div class='state' style='height:55px'>nd</div> 
-                    <div class='state' style='height:55px'>oh</div> 
-                    <div class='state' style='height:55px'>ok</div> 
-                    <div class='state' style='height:55px'>or</div> 
-                    <div class='state' style='height:55px'>pa</div> 
-                    <div class='state' style='height:40px'>ri</div> 
-                    <div class='state'>sc</div> 
-                    <div class='state'>sd</div> 
-                    <div class='state'>tn</div> 
-                    <div class='state'>tx</div> 
-                    <div class='state'>ut</div> 
-                    <div class='state'>vt</div> 
-                    <div class='state'>va</div> 
-                    <div class='state' style='height:55px'>wa</div> 
-                    <div class='state' style='height:65px'>wv</div> 
-                    <div class='state' style='height:55px'>wi</div> 
-                    <div class='state'>wy</div>
+                    <div class='state'>AL</div>
+                    <div class='state'>AK</div> 
+                    <div class='state'>AZ</div> 
+                    <div class='state'>AR</div>
+                    <div class='state'>CA</div> 
+                    <div class='state'>CO</div> 
+                    <div class='state'>CT</div> 
+                    <div class='state'>DE</div> 
+                    <div class='state'>FL</div> 
+                    <div class='state' style='height:50px'>GA</div> 
+                    <div class='state' style='height:55px'>HI</div> 
+                    <div class='state' style='height:40px'>ID</div> 
+                    <div class='state'>IL</div> 
+                    <div class='state'>IN</div> 
+                    <div class='state'>IA</div> 
+                    <div class='state'>KS</div> 
+                    <div class='state'>KY</div> 
+                    <div class='state'>LA</div> 
+                    <div class='state' style='height:55px'>ME</div> 
+                    <div class='state' style='height:55px'>MD</div> 
+                    <div class='state' style='height:65px'>MA</div> 
+                    <div class='state' style='height:45px'>MI</div> 
+                    <div class='state' style='height:60px'>MN</div> 
+                    <div class='state' style='height:55px'>MS</div> 
+                    <div class='state' style='height:55px'>MO</div> 
+                    <div class='state' style='height:55px'>MT</div> 
+                    <div class='state'>NE</div> 
+                    <div class='state'>NV</div> 
+                    <div class='state' style='height:55px'>NH</div> 
+                    <div class='state' style='height:55px'>NJ</div> 
+                    <div class='state' style='height:55px'>NM</div> 
+                    <div class='state' style='height:65px'>NY</div> 
+                    <div class='state'>NC</div> 
+                    <div class='state' style='height:55px'>ND</div> 
+                    <div class='state' style='height:55px'>OH</div> 
+                    <div class='state' style='height:55px'>OK</div> 
+                    <div class='state' style='height:55px'>OR</div> 
+                    <div class='state' style='height:55px'>PA</div> 
+                    <div class='state' style='height:40px'>RI</div> 
+                    <div class='state'>SC</div> 
+                    <div class='state'>SD</div> 
+                    <div class='state'>TN</div> 
+                    <div class='state'>TX</div> 
+                    <div class='state'>UT</div> 
+                    <div class='state'>VT</div> 
+                    <div class='state'>VA</div> 
+                    <div class='state' style='height:55px'>WA</div> 
+                    <div class='state' style='height:65px'>WV</div> 
+                    <div class='state' style='height:55px'>WI</div> 
+                    <div class='state'>WY</div>
                 </div>
     <script src="https://d3js.org/d3.v4.min.js"></script>
     <script src="https://d3js.org/topojson.v1.min.js"></script>
@@ -127,12 +127,10 @@
     }
     
     function secondsEpochToDate(date) {
-        debugger
         let year = (date.slice(0,4))
         let month = (date.slice(4,6))
         let day = (date.slice(6,8))
         let d = `${year}/${month}/${day}`
-        debugger
         return d
     }
     
@@ -142,16 +140,16 @@
         
     function graph(datum) {
         let data = JSON.parse(datum)
-        debugger
+
         function clenseDups(data) {
             const distinctVals = [];
-            debugger
+            
             for (let index = 0; index < 10; index++) {
                 if (index !== 0 && secondsEpochToDate(data[0].date) !== secondsEpochToDate(data[index - 1].date)) {
                     distinctVals.push(data[index])
                 };
             }
-            debugger
+            
             return distinctVals.reverse();
         }
 
@@ -161,7 +159,7 @@
             
             totalPositive = parseInt(data[0].positive);
             totalDeaths = parseInt(data[0].death);
-            debugger
+            
             return ((totalDeaths / totalPositive)*100).toFixed(2)
         } 
 
@@ -205,10 +203,9 @@
 
 
         const distinctValues = clenseDups(data);
-        debugger
+        
         xScale.domain(distinctValues.map(time => secondsEpochToDate(time.date)))
         yScale.domain([0, d3.max(distinctValues, function (dt) { return parseInt(dt.positive) })]) 
-        debugger
 
         if (!(document.querySelector('#anchor'))) {
             svg.append("g")
@@ -267,7 +264,6 @@
             .attr('font-size', '12')
             .attr("transform", "rotate(0)")
         
-        debugger
         let rectangles = g.selectAll(".rect")
             .data(distinctValues)
             .enter().append("rect")
@@ -356,7 +352,7 @@
             }
             
             g.append("path")
-                .datum(topojson.mesh(states, states.objects.usStates, function (a, b) { return a.properties.STATE_ABBR === stadt || b.properties.STATE_ABBR === stadt; }))
+                .datum(topojson.mesh(states, states.objects.usStates, function (a, b) { if ( stadt ) { return a.properties.STATE_ABBR === stadt.toUpperCase() || b.properties.STATE_ABBR === stadt.toUpperCase() } } ))
                 .attr("id", "state-borders")
                 .attr("d", path);
         
