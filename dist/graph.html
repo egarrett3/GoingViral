@@ -144,7 +144,7 @@
         function clenseDups(data) {
             const distinctVals = [];
             
-            for (let index = 0; index < 10; index++) {
+            for (let index = 0; index < 50; index++) {
                 if (index !== 0 && secondsEpochToDate(data[0].date) !== secondsEpochToDate(data[index - 1].date)) {
                     distinctVals.push(data[index])
                 };
