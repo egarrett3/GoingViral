@@ -6,9 +6,9 @@ h1 {
 
 div#author {
     position: absolute;
-    width: 350px;
+    width: 220px;
     top: 0%;
-    left: 80%;
+    left: 76%;
 }
 
 .links {
@@ -131,3 +131,4 @@ div.state {
     top: 0;
     left: 0;
 }
+
