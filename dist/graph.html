@@ -123,6 +123,7 @@
     let yScale = d3.scaleLinear().range([height - margin, 0])
         
     function commasForNums(num) {
+        if (num === '') {return 'N/A'}
         return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     }
     
