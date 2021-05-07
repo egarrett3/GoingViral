@@ -10,9 +10,9 @@
  * MVP4: Make the bars pop up/appear in a flowing manner and flow gracefully into other data sets.
  * BONUS: integrate other viruses which will require different API
 
-## Wireframes 
+## Screenshot
 
-   ![wireframe](https://user-images.githubusercontent.com/37485814/90427841-16770500-e091-11ea-96a7-cdef7e586d1c.png)
+   ![GoingViral](https://user-images.githubusercontent.com/37485814/117493362-b9292980-af27-11eb-983e-ad56f18694db.png)
  
 ## Architecture and Technology 
  * I will using JS and D3 to create the graphical transitions, and html and scss to style and structure the DOM. Webpack will be used as the bundler and babel as the transpiler.
@@ -27,3 +27,5 @@
    Create the carousel component to scroll through list of states 
  * Day 5: Friday Aug 21
    Tie up loose ends with styling and functionality or begin on bonus MVP.
+
+### Hosted on Heroku - https://goingviral1.herokuapp.com/
